@@ -10,10 +10,51 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171225110418) do
+ActiveRecord::Schema.define(version: 20171225113705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "discounts", force: :cascade do |t|
+    t.decimal "ratio", default: "0.0", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "item_id"
+    t.index ["item_id"], name: "index_discounts_on_item_id"
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description", null: false
+    t.string "unit", null: false
+    t.decimal "price", null: false
+    t.integer "quantity", null: false
+    t.string "category", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "retailer_id"
+    t.index ["retailer_id"], name: "index_items_on_retailer_id"
+  end
+
+  create_table "operational_hours", force: :cascade do |t|
+    t.string "operational_hours_type", default: "DEFAULT", null: false
+    t.time "open", default: "2000-01-01 08:00:00", null: false
+    t.time "close", default: "2000-01-01 20:00:00", null: false
+    t.date "special_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "retailer_id"
+    t.index ["retailer_id"], name: "index_operational_hours_on_retailer_id"
+  end
+
+  create_table "retailers", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "description"
+    t.string "latitude"
+    t.string "longitude"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -43,4 +84,7 @@ ActiveRecord::Schema.define(version: 20171225110418) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "discounts", "items"
+  add_foreign_key "items", "retailers"
+  add_foreign_key "operational_hours", "retailers"
 end
