@@ -32,8 +32,8 @@ ActiveRecord::Schema.define(version: 20171225113705) do
     t.string "category", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "retailer_id"
-    t.index ["retailer_id"], name: "index_items_on_retailer_id"
+    t.bigint "vendor_id"
+    t.index ["vendor_id"], name: "index_items_on_vendor_id"
   end
 
   create_table "operational_hours", force: :cascade do |t|
@@ -43,11 +43,11 @@ ActiveRecord::Schema.define(version: 20171225113705) do
     t.date "special_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "retailer_id"
-    t.index ["retailer_id"], name: "index_operational_hours_on_retailer_id"
+    t.bigint "vendor_id"
+    t.index ["vendor_id"], name: "index_operational_hours_on_vendor_id"
   end
 
-  create_table "retailers", force: :cascade do |t|
+  create_table "vendors", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
     t.string "latitude"
@@ -85,6 +85,6 @@ ActiveRecord::Schema.define(version: 20171225113705) do
   end
 
   add_foreign_key "discounts", "items"
-  add_foreign_key "items", "retailers"
-  add_foreign_key "operational_hours", "retailers"
+  add_foreign_key "items", "vendors"
+  add_foreign_key "operational_hours", "vendors"
 end

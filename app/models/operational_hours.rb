@@ -1,3 +1,3 @@
 class OperationalHours < ApplicationRecord
-  belongs_to :retailer
+  belongs_to :vendor
 end

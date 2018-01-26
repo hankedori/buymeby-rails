@@ -9,6 +9,6 @@ class CreateOperationalHours < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_reference :operational_hours, :retailer, foreign_key: true
+    add_reference :operational_hours, :vendor, foreign_key: true
   end
 end

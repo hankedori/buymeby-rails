@@ -4,8 +4,8 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @retailer = Retailer.find(params[:retailer_id])
-    @items = @retailer.items.all
+    @vendor = Vendor.find(params[:vendor_id])
+    @items = @vendor.items.all
   end
 
   # GET /items/1
@@ -16,8 +16,8 @@ class ItemsController < ApplicationController
   # POST /items
   # POST /items.json
   def create
-    @retailer = Retailer.find(params[:retailer_id])
-    @item = @retailer.items.new(item_params)
+    @vendor = Vendor.find(params[:vendor_id])
+    @item = @vendor.items.new(item_params)
     @item.discounts.new(discount_params) if discount_params.present?
 
     if @item.save

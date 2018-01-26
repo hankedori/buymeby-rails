@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resource :api do
     resources :discounts
     resources :operational_hours
-    resources :retailers do
+    resources :vendors do
       resources :items
     end
   end

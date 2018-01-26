@@ -11,6 +11,6 @@ class CreateItems < ActiveRecord::Migration[5.1]
       t.timestamps
     end
 
-    add_reference :items, :retailer, foreign_key: true
+    add_reference :items, :vendor, foreign_key: true
   end
 end

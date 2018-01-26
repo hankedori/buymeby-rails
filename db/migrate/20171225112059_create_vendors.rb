@@ -1,6 +1,6 @@
-class CreateRetailers < ActiveRecord::Migration[5.1]
+class CreateVendors < ActiveRecord::Migration[5.1]
   def change
-    create_table :retailers do |t|
+    create_table :vendors do |t|
       t.string :name, :null => false
       t.string :description
       t.string :latitude

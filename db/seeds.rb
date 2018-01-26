@@ -5,3 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+if Vendor.all.empty?
+  alpha = Vendor.new(name: 'Alpha Market', description: 'Freshest of them all', latitude: '40.7559', longitude: '-73.9911')
+end
