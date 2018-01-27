@@ -45,6 +45,13 @@ class VendorsController < ApplicationController
     @vendor.destroy
   end
 
+  def add_inventory
+    @vendor = Vendor.find(params[:vendor_id])
+    vendor_inventory_parser = VendorInventoryParser.new(vendor: @vendor, url: inventory_params[:url], category: inventory_params[:category])
+
+    render :show, status: :ok if vendor_inventory_parser.perform
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_vendor
@@ -58,5 +65,9 @@ class VendorsController < ApplicationController
 
     def operational_hours_params
       params.require(:vendor).permit(:operational_hours).permit(:type, :open, :close)
+    end
+
+    def inventory_params
+      params.permit(:url, :category)
     end
 end
