@@ -8,6 +8,15 @@ class CartController < ApplicationController
     end
   end
 
+  def order
+    @user_order_creation = UserOrderCreation.from_cart_params!(User.first, cart_params)
+    if @user_order_creation.save
+      render :order, status: :created
+    else
+      render json: @user_order_creation.errors, status: :unprocessable_entity
+    end
+  end
+
   def cart_params
     params.require(:cart).permit!
   end

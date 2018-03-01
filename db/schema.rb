@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180128043915) do
+ActiveRecord::Schema.define(version: 20180301020419) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,28 @@ ActiveRecord::Schema.define(version: 20180128043915) do
     t.index ["vendor_id"], name: "index_operational_hours_on_vendor_id"
   end
 
+  create_table "order_details", force: :cascade do |t|
+    t.decimal "price", null: false
+    t.integer "quantity", null: false
+    t.decimal "discount"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_order_id"
+    t.bigint "vendor_order_id"
+    t.bigint "item_id"
+    t.index ["item_id"], name: "index_order_details_on_item_id"
+    t.index ["user_order_id"], name: "index_order_details_on_user_order_id"
+    t.index ["vendor_order_id"], name: "index_order_details_on_vendor_order_id"
+  end
+
+  create_table "user_orders", force: :cascade do |t|
+    t.string "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_orders_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -76,6 +98,16 @@ ActiveRecord::Schema.define(version: 20180128043915) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  create_table "vendor_orders", force: :cascade do |t|
+    t.string "status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_order_id"
+    t.bigint "vendor_id"
+    t.index ["user_order_id"], name: "index_vendor_orders_on_user_order_id"
+    t.index ["vendor_id"], name: "index_vendor_orders_on_vendor_id"
+  end
+
   create_table "vendors", force: :cascade do |t|
     t.string "name", null: false
     t.string "description"
@@ -89,4 +121,10 @@ ActiveRecord::Schema.define(version: 20180128043915) do
   add_foreign_key "discounts", "items"
   add_foreign_key "items", "vendors"
   add_foreign_key "operational_hours", "vendors"
+  add_foreign_key "order_details", "items"
+  add_foreign_key "order_details", "user_orders"
+  add_foreign_key "order_details", "vendor_orders"
+  add_foreign_key "user_orders", "users"
+  add_foreign_key "vendor_orders", "user_orders"
+  add_foreign_key "vendor_orders", "vendors"
 end
