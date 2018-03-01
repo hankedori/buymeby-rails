@@ -9,7 +9,7 @@ class CartController < ApplicationController
   end
 
   def order
-    @user_order_creation = UserOrderCreation.from_cart_params!(User.first, cart_params)
+    @user_order_creation = UserOrderCreation.from_cart_params!(current_user, cart_params)
     if @user_order_creation.save
       render :order, status: :created
     else
