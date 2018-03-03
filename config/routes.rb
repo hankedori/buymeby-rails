@@ -2,11 +2,11 @@ Rails.application.routes.draw do
   resource :api do
     resources :discounts
     resources :operational_hours
+    resources :user_orders
     resources :vendors do
       resources :items
       post 'add_inventory', to: 'vendors#add_inventory'
     end
-
     post 'populate_cart' => "cart#populate"
     post 'place_order' => "cart#order"
   end

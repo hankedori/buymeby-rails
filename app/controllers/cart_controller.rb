@@ -1,4 +1,6 @@
 class CartController < ApplicationController
+  before_action :authenticate_member!
+
   def populate
     @populated_cart = cart_params.to_h.reduce([]) do |populated_cart, (vendor_id, items)|
       vendor = Vendor.find(vendor_id)
