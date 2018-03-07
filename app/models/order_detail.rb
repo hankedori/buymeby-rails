@@ -3,6 +3,8 @@ class OrderDetail < ApplicationRecord
   belongs_to :vendor_order
   belongs_to :item
 
+  delegate :image_src, :name, to: :item
+
   def total_cost
     @total_cost ||= price * quantity
   end

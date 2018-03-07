@@ -28,6 +28,8 @@ gem 'devise_token_auth'
 gem 'omniauth'
 gem 'faraday'
 gem 'rest-client'
+gem 'aws-sdk'
+gem 'paperclip'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

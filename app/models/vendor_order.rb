@@ -2,6 +2,8 @@ class VendorOrder < ApplicationRecord
   belongs_to :vendor
   has_many :order_details
 
+  delegate :name, to: :vendor
+
   def total_amount
     @total_amount ||= order_details.sum(&:total_cost)
   end
