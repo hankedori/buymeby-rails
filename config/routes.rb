@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     post 'populate_cart' => "cart#populate"
     post 'place_order' => "cart#order"
     resource :sellmeby do
-      post 'upload_logo' => "logos#upload"
+      scope module: 'sellmeby' do
+        post 'upload_logo' => "logos#upload"
+        post 'update_hours' => "vendors#update_hours"
+        resource :vendors
+      end
     end
   end
   mount_devise_token_auth_for 'User', at: 'api/auth'

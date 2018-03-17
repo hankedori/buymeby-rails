@@ -12,4 +12,19 @@ class Vendor < ApplicationRecord
   validates_attachment :logo,
                        content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] },
                        size: { in: 0..5.megabytes }
+
+  def logo_url
+    logo.url
+  end
+
+  def update_hours(days)
+    days.each do |day|
+      hour = operational_hours.find_or_create_by!(day: day.day)
+      hour.open = day.open
+      hour.close = day.close
+      hour.save!
+    end
+
+    true
+  end
 end
