@@ -17,6 +17,16 @@ class Vendor < ApplicationRecord
     logo.url
   end
 
+  def setup_complete
+    description.present? &&
+    logo.present? &&
+    operational_hours.any? &&
+    place_id.present? &&
+    latitude.present? &&
+    longitude.present? &&
+    address.present?
+  end
+
   def update_hours(days)
     days.each do |day|
       hour = operational_hours.find_or_create_by!(day: day.day)
@@ -26,5 +36,9 @@ class Vendor < ApplicationRecord
     end
 
     true
+  end
+
+  def token_validation_response
+    self.as_json(include: [:operational_hours]).merge(logo_url: logo_url, setup_complete: setup_complete)
   end
 end

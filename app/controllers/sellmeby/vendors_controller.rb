@@ -20,7 +20,7 @@ class Sellmeby::VendorsController < ApplicationController
   end
 
   def vendor_params
-    params.permit(:place_id, :latitude, :longitude, :address)
+    params.permit(:place_id, :latitude, :longitude, :address, :description)
   end
 
   def hour_params
