@@ -138,6 +138,8 @@ ActiveRecord::Schema.define(version: 20180317174703) do
     t.string "unconfirmed_email"
     t.string "email"
     t.json "tokens"
+    t.string "place_id"
+    t.string "address"
     t.index ["confirmation_token"], name: "index_vendors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_vendors_on_email", unique: true
     t.index ["reset_password_token"], name: "index_vendors_on_reset_password_token", unique: true
