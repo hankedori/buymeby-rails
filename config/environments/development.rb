@@ -47,6 +47,7 @@ Rails.application.configure do
 
   config.paperclip_defaults = {
     storage: :s3,
+    s3_protocol: :https,
     s3_credentials: {
       access_key_id: 'AKIAJ3T6UU32CLB5U2HQ',
       secret_access_key: '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',

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
         post 'upload_logo' => "logos#upload"
         post 'update_hours' => "vendors#update_hours"
         resource :vendors
+        resources :items
       end
     end
   end
