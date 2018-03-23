@@ -2,8 +2,6 @@ class Sellmeby::VendorsController < ApplicationController
   before_action :authenticate_vendor!
 
   def show
-    @vendor = current_vendor
-    @items = current_vendor.items
   end
 
   def update
