@@ -30,8 +30,9 @@ class Vendor < ApplicationRecord
   def update_hours(days)
     days.each do |day|
       hour = operational_hours.find_or_create_by!(day: day.day)
+      hour.open_time = day.open_time
+      hour.close_time = day.close_time
       hour.open = day.open
-      hour.close = day.close
       hour.save!
     end
 

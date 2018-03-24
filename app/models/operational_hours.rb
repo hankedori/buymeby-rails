@@ -4,9 +4,10 @@ class OperationalHours < ApplicationRecord
   def self.collection_from_day_array(array)
     array.map do |day|
       new(
-        day: day[:name],
-        open: day[:open_time],
-        close: day[:close_time]
+        day: day[:day],
+        open: day[:open],
+        open_time: day[:open_time],
+        close_time: day[:close_time]
       )
     end
   end

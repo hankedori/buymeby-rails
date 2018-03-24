@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180320032249) do
+ActiveRecord::Schema.define(version: 20180324214143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,13 +43,14 @@ ActiveRecord::Schema.define(version: 20180320032249) do
 
   create_table "operational_hours", force: :cascade do |t|
     t.string "operational_hours_type", default: "DEFAULT", null: false
-    t.time "open", default: "2000-01-01 08:00:00"
-    t.time "close", default: "2000-01-01 20:00:00"
+    t.time "open_time", default: "2000-01-01 08:00:00"
+    t.time "close_time", default: "2000-01-01 20:00:00"
     t.date "special_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "vendor_id"
     t.string "day"
+    t.boolean "open", default: false
     t.index ["vendor_id"], name: "index_operational_hours_on_vendor_id"
   end
 

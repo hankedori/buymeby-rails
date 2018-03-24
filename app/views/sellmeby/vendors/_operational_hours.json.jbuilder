@@ -1,1 +1,1 @@
-json.extract! day, :day, :open, :close
+json.extract! day, :day, :open, :open_time, :close_time
