@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
 
   has_many :orders, class_name: "UserOrder"
   has_many :vendor_orders, through: :orders
+
+  def name
+    email
+  end
 end

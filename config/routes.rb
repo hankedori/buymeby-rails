@@ -15,6 +15,7 @@ Rails.application.routes.draw do
         post 'update_hours' => "vendors#update_hours"
         resource :vendors
         resources :items
+        resources :orders
       end
     end
   end

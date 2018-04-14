@@ -1,6 +1,7 @@
 class Vendor < ApplicationRecord
   has_many :items
   has_many :operational_hours, class_name: 'OperationalHours'
+  has_many :orders, class_name: 'VendorOrder'
 
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable, :omniauthable

@@ -1,7 +1,7 @@
 class UserOrderCreation
   include ActiveModel::Model
 
-  INITIAL_STATUS = 'reserved'
+  INITIAL_STATUS = 'RESERVED'
 
   attr_accessor :user, :user_order
 
