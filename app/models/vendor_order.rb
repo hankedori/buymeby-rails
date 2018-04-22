@@ -9,6 +9,9 @@ class VendorOrder < ApplicationRecord
   delegate :user, to: :user_order
   delegate :name, to: :user
 
+  scope :completed, -> { where(status: 'COMPLETE') }
+  scope :reserved, -> { where(status: 'RESERVED') }
+
   def complete!
     update! status: 'COMPLETE', completed_at: Time.now
   end
@@ -18,7 +21,7 @@ class VendorOrder < ApplicationRecord
   end
 
   def created_description
-    @created_description ||= "placed " + time_ago_in_words(created_at) + " ago"
+    completed? ? "completed " +  time_ago_in_words(completed_at) + " ago" : "placed " + time_ago_in_words(created_at) + " ago"
   end
 
   def total_description
@@ -27,5 +30,9 @@ class VendorOrder < ApplicationRecord
 
   def image_src
     @image_src ||= order_details.first.image_file_src if order_details.present?
+  end
+
+  def completed?
+    status == 'COMPLETE'
   end
 end

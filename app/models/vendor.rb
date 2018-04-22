@@ -20,7 +20,6 @@ class Vendor < ApplicationRecord
 
   def setup_complete
     description.present? &&
-    logo.present? &&
     operational_hours.any? &&
     place_id.present? &&
     latitude.present? &&
