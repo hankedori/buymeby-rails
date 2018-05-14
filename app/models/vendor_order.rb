@@ -8,12 +8,22 @@ class VendorOrder < ApplicationRecord
 
   delegate :user, to: :user_order
   delegate :name, to: :user
+  delegate :name, to: :vendor, prefix: true
 
   scope :completed, -> { where(status: 'COMPLETE') }
   scope :reserved, -> { where(status: 'RESERVED') }
 
   def complete!
     update! status: 'COMPLETE', completed_at: Time.now
+  end
+
+  def cancel!
+    transaction do
+      order_details.each do |detail|
+        detail.item.update!(quantity: detail.item.quantity + detail.quantity)
+      end
+      update! status: 'CANCELLED'
+    end
   end
 
   def total_amount

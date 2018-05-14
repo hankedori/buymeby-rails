@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   resource :api do
     resources :discounts
     resources :operational_hours
-    resources :user_orders
+    resources :user_orders do
+      put 'cancel', to: 'user_orders#cancel'
+    end
     resources :vendors do
       resources :items
       post 'add_inventory', to: 'vendors#add_inventory'
