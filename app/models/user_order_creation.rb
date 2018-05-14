@@ -26,6 +26,6 @@ class UserOrderCreation
   end
 
   def save
-    valid? && user_order.save!
+    valid? && user_order.save
   end
 end
