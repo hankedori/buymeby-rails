@@ -5,7 +5,12 @@ class CartController < ApplicationController
     @populated_cart = cart_params.to_h.reduce([]) do |populated_cart, (vendor_id, items)|
       vendor = Vendor.find(vendor_id)
       vendor_hash = vendor.serializable_hash
-      vendor_hash["items"] = Item.find(items.keys).as_json(methods: :image_file_src)
+      vendor_hash["items"] = items.reduce([]) do |item_array, (item_id, quantity)|
+        item = vendor.items.find(item_id).as_json(methods: :image_file_src)
+        item['total'] = '%.2f' % (quantity * item['price'])
+        item_array.push(item)
+      end
+      # vendor_hash["items"] = Item.find(items.keys).as_json(methods: :image_file_src)
       populated_cart.push(vendor_hash)
     end
   end
