@@ -1,4 +1,6 @@
 class Vendor < ApplicationRecord
+  enum status: [ :inactive, :active ]
+
   has_many :items
   has_many :operational_hours, class_name: 'OperationalHours'
   has_many :orders, class_name: 'VendorOrder'
@@ -24,7 +26,8 @@ class Vendor < ApplicationRecord
     place_id.present? &&
     latitude.present? &&
     longitude.present? &&
-    address.present?
+    address.present? &&
+    logo_url.present?
   end
 
   def update_hours(days)
