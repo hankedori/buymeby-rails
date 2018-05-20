@@ -1,4 +1,4 @@
-json.extract! @order, :id, :name, :created_description, :total_description, :image_src
+json.extract! @order, :id, :name, :created_description, :total_description, :status_description, :total_amount, :image_src
 json.set! :vendor_orders do
   json.array! @order.vendor_orders do |vendor_order|
     json.extract! vendor_order, :id, :name, :vendor_name, :status, :total_amount

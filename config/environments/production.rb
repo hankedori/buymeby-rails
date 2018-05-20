@@ -85,8 +85,8 @@ Rails.application.configure do
     storage: :s3,
     s3_protocol: :https,
     s3_credentials: {
-      access_key_id: 'AKIAJ3T6UU32CLB5U2HQ',
-      secret_access_key: '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',
+      access_key_id: ENV['S3_ACCESS_KEY_ID'],
+      secret_access_key: ENV['S3_SECRET_ACCESS_KEY'],
       bucket: 'buymeby',
       s3_region: 'us-east-1',
       s3_host_name: 's3.us-east-1.amazonaws.com'

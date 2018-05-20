@@ -10,6 +10,7 @@ class CartController < ApplicationController
         item['total'] = '%.2f' % (quantity * item['price'])
         item_array.push(item)
       end
+      vendor_hash["total"] = vendor_hash["items"].sum { |i| i['total'] }
       # vendor_hash["items"] = Item.find(items.keys).as_json(methods: :image_file_src)
       populated_cart.push(vendor_hash)
     end

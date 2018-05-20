@@ -18,6 +18,17 @@ class UserOrder < ApplicationRecord
     @total_description ||= "$" + total_amount.to_s + ", " + vendor_count.to_s + " vendor(s)"
   end
 
+  def status_description
+    @status_description ||=
+      if vendor_orders.completed.any?
+        "COMPLETE"
+      elsif vendor_orders.cancelled.any?
+        "CANCELLED"
+      else
+        "AWAITING PICKUP"
+      end
+  end
+
   def vendor_count
     @vendor_count ||= vendor_orders.count
   end
@@ -27,6 +38,6 @@ class UserOrder < ApplicationRecord
   end
 
   def image_src
-    @image_src ||= vendors.first.image_src if vendors.present?
+    @image_src ||= vendors.first.logo_url if vendors.present?
   end
 end
