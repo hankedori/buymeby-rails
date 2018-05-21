@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     resources :vendors do
       resources :items
       post 'add_inventory', to: 'vendors#add_inventory'
+      post 'block', to: 'vendors#block'
     end
     post 'populate_cart' => "cart#populate"
     post 'place_order' => "cart#order"

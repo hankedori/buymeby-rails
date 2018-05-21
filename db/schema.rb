@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180519005902) do
+ActiveRecord::Schema.define(version: 20180521194955) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -66,6 +66,14 @@ ActiveRecord::Schema.define(version: 20180519005902) do
     t.index ["item_id"], name: "index_order_details_on_item_id"
     t.index ["user_order_id"], name: "index_order_details_on_user_order_id"
     t.index ["vendor_order_id"], name: "index_order_details_on_vendor_order_id"
+  end
+
+  create_table "user_blocked_vendors", force: :cascade do |t|
+    t.string "reason"
+    t.bigint "vendor_id"
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_user_blocked_vendors_on_user_id"
+    t.index ["vendor_id"], name: "index_user_blocked_vendors_on_vendor_id"
   end
 
   create_table "user_orders", force: :cascade do |t|
@@ -159,6 +167,8 @@ ActiveRecord::Schema.define(version: 20180519005902) do
   add_foreign_key "order_details", "items"
   add_foreign_key "order_details", "user_orders"
   add_foreign_key "order_details", "vendor_orders"
+  add_foreign_key "user_blocked_vendors", "users"
+  add_foreign_key "user_blocked_vendors", "vendors"
   add_foreign_key "user_orders", "users"
   add_foreign_key "vendor_orders", "user_orders"
   add_foreign_key "vendor_orders", "vendors"

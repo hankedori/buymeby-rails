@@ -4,7 +4,7 @@ class VendorsController < ApplicationController
   # GET /vendors
   # GET /vendors.json
   def index
-    @vendors = Vendor.active
+    @vendors = Vendor.active - current_user.blocked_vendors
   end
 
   # GET /vendors/1
@@ -50,6 +50,12 @@ class VendorsController < ApplicationController
     vendor_inventory_parser = VendorInventoryParser.new(vendor: @vendor, url: inventory_params[:url], category: inventory_params[:category])
 
     render :show, status: :ok if vendor_inventory_parser.perform
+  end
+
+  def block
+    @vendor = Vendor.find(params[:vendor_id])
+
+    current_user.user_blocked_vendors.create!(vendor: @vendor, reason: 'not provided')
   end
 
   private
