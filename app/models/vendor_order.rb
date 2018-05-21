@@ -11,8 +11,8 @@ class VendorOrder < ApplicationRecord
   delegate :name, to: :vendor, prefix: true
 
   scope :completed, -> { where(status: 'COMPLETE') }
-  scope :reserved, -> { where(status: 'CANCELLED') }
-  scope :cancelled, -> { where(status: 'RESERVED') }
+  scope :reserved, -> { where(status: 'RESERVED') }
+  scope :cancelled, -> { where(status: 'CANCELLED') }
 
   def complete!
     update! status: 'COMPLETE', completed_at: Time.now
