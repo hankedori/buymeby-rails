@@ -32,7 +32,13 @@ class VendorOrder < ApplicationRecord
   end
 
   def created_description
-    completed? ? "completed " +  time_ago_in_words(completed_at) + " ago" : "placed " + time_ago_in_words(created_at) + " ago"
+    if completed?
+      "completed " +  time_ago_in_words(completed_at) + " ago"
+    elsif cancelled?
+      "cancelled " +  time_ago_in_words(updated_at) + " ago"
+    else
+      "placed " + time_ago_in_words(created_at) + " ago"
+    end
   end
 
   def total_description
@@ -45,5 +51,9 @@ class VendorOrder < ApplicationRecord
 
   def completed?
     status == 'COMPLETE'
+  end
+
+  def cancelled?
+    status == 'CANCELLED'
   end
 end

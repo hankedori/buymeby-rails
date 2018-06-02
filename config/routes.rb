@@ -21,8 +21,13 @@ Rails.application.routes.draw do
         resources :orders
       end
     end
+    post 'activate_vendor' => "admin_actions#activate_vendor"
+    post 'deactivate_vendor' => "admin_actions#deactivate_vendor"
   end
-  mount_devise_token_auth_for 'User', at: 'api/auth'
-  mount_devise_token_auth_for 'Vendor', at: 'api/sellmeby/auth'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  mount_devise_token_auth_for 'User', at: 'api/auth', controllers: {
+    :registrations => "custom/user_registrations"
+  }
+  mount_devise_token_auth_for 'Vendor', at: 'api/sellmeby/auth', controllers: {
+    :registrations => "sellmeby/custom/vendor_registrations"
+  }
 end

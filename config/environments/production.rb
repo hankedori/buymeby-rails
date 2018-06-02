@@ -92,4 +92,11 @@ Rails.application.configure do
       s3_host_name: 's3.us-east-1.amazonaws.com'
     }
   }
+
+  config.middleware.use ExceptionNotification::Rack,
+    slack: {
+      webhook_url: "https://hooks.slack.com/services/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",
+      channel: "#server_errors",
+      additional_parameters: { mrkdwn: true }
+    }
 end

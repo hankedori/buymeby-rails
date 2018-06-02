@@ -3,7 +3,7 @@ class Sellmeby::OrdersController < ApplicationController
 
   def index
     @orders = current_vendor.orders.reserved
-    @completed_orders = current_vendor.orders.completed
+    @completed_orders = current_vendor.orders.completed + current_vendor.orders.cancelled
   end
 
   def update
