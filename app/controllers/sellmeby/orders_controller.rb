@@ -1,4 +1,4 @@
-class Sellmeby::OrdersController < ApplicationController
+class Sellmeby::OrdersController < ApiController
   before_action :authenticate_vendor!
 
   def index

@@ -1,4 +1,4 @@
-class Sellmeby::ItemsController < ApplicationController
+class Sellmeby::ItemsController < ApiController
   before_action :authenticate_vendor!
   before_action :set_item, only: [:show, :update, :destroy]
 

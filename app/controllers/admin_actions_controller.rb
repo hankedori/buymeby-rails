@@ -1,4 +1,4 @@
-class AdminActionsController < ApplicationController
+class AdminActionsController < ApiController 
   def activate_vendor
     @vendor = Vendor.find vendor_id
     @vendor.active!

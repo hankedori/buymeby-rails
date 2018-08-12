@@ -1,4 +1,4 @@
-class CartController < ApplicationController
+class CartController < ApiController
   before_action :authenticate_member!
 
   def populate

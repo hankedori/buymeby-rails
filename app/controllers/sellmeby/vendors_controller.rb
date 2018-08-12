@@ -1,4 +1,4 @@
-class Sellmeby::VendorsController < ApplicationController
+class Sellmeby::VendorsController < ApiController
   before_action :authenticate_vendor!
 
   def show

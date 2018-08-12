@@ -1,4 +1,4 @@
-class DiscountsController < ApplicationController
+class DiscountsController < ApiController
   before_action :set_discount, only: [:show, :update, :destroy]
 
   # GET /discounts

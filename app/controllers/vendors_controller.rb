@@ -1,4 +1,4 @@
-class VendorsController < ApplicationController
+class VendorsController < ApiController
   before_action :set_vendor, only: [:show, :update, :destroy]
 
   # GET /vendors

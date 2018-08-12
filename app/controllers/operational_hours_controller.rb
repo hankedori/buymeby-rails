@@ -1,4 +1,4 @@
-class OperationalHoursController < ApplicationController
+class OperationalHoursController < ApiController
   before_action :set_operational_hour, only: [:show, :update, :destroy]
 
   # GET /operational_hours

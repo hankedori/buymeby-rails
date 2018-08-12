@@ -1,4 +1,4 @@
-class UserOrdersController < ApplicationController
+class UserOrdersController < ApiController
   before_action :authenticate_member!
 
   def index
