@@ -10,7 +10,7 @@ ActiveAdmin.register Item do
       f.input :price
       f.input :unit
       f.input :quantity
-      f.input :image, required: true, as: :file
+      f.input :image, as: :file
     end
     f.actions
   end

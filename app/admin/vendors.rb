@@ -8,7 +8,7 @@ ActiveAdmin.register Vendor do
   filter :created_at
   filter :status
 
-  permit_params :name, :email, :password, :password_confirmation, :description, :status
+  permit_params :name, :email, :password, :password_confirmation, :description, :status, :logo
 
   index do
     selectable_column
@@ -29,6 +29,9 @@ ActiveAdmin.register Vendor do
   end
 
   show title: :name do
+    panel "Logo" do
+      image_tag(vendor.logo_url)
+    end
     panel "Product Listings" do
       table_for(vendor.items) do
         column("Item", sortable: :id) do |item|
@@ -86,6 +89,7 @@ ActiveAdmin.register Vendor do
       unless f.object.new_record?
         f.input :status
       end
+      f.input :logo, as: :file
     end
     f.actions
   end
