@@ -2,7 +2,7 @@
 ---
 applications:
 - name: buymeby-prod
-  memory: 128M
+  memory: 256M
   instances: 1
   path: .
   # command: bundle exec rake db:migrate && bundle exec rake db:seed && rails s -p $PORT
