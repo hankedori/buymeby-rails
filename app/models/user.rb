@@ -12,4 +12,13 @@ class User < ActiveRecord::Base
   def name
     email
   end
+
+  def send_push_notif!(message, data = {})
+    n = Rpush::Apns::Notification.new
+    n.app = Rpush::Apns::App.find_by_name("Buymeby")
+    n.device_token = device_token
+    n.alert = message
+    n.data = data
+    n.save!
+  end
 end

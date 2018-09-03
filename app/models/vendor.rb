@@ -45,4 +45,13 @@ class Vendor < ApplicationRecord
   def token_validation_response
     self.as_json(include: [:operational_hours]).merge(logo_url: logo_url, setup_complete: setup_complete)
   end
+
+  def send_push_notif!(message, data = {})
+    n = Rpush::Apns::Notification.new
+    n.app = Rpush::Apns::App.find_by_name("Sellmeby")
+    n.device_token = device_token
+    n.alert = message
+    n.data = data
+    n.save!
+  end
 end
