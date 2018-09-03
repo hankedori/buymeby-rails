@@ -47,11 +47,13 @@ class Vendor < ApplicationRecord
   end
 
   def send_push_notif!(message, data = {})
-    n = Rpush::Apns::Notification.new
-    n.app = Rpush::Apns::App.find_by_name("Sellmeby")
-    n.device_token = device_token
-    n.alert = message
-    n.data = data
-    n.save!
+    if device_token.present?
+      n = Rpush::Apns::Notification.new
+      n.app = Rpush::Apns::App.find_by_name("Sellmeby")
+      n.device_token = device_token
+      n.alert = message
+      n.data = data
+      n.save!
+    end
   end
 end
