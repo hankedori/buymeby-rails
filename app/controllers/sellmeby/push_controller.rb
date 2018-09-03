@@ -1,4 +1,4 @@
-class PushController < ApiController
+class Sellmeby::PushController < ApiController
   before_action :authenticate_vendor!
 
   def create
