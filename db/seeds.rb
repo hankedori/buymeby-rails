@@ -110,6 +110,7 @@ if Vendor.all.empty?
 end
 if Rails.env.development?
   AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
   app = Rpush::Apns::App.new
   app.name = "Buymeby"
   app.certificate = File.read('config/development.pem')
@@ -117,4 +118,12 @@ if Rails.env.development?
   app.password = "buymeby"
   app.connections = 1
   app.save!
+
+  app2 = Rpush::Apns::App.new
+  app2.name = "Sellmeby"
+  app2.certificate = File.read('config/development_sellmeby.pem')
+  app2.environment = "development"
+  app2.password = "sellmeby"
+  app2.connections = 1
+  app2.save!
 end
