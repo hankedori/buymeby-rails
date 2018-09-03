@@ -20,6 +20,7 @@ Rails.application.routes.draw do
         resource :vendors
         resources :items
         resources :orders
+        resources :push
       end
     end
     post 'populate_cart' => "cart#populate"
