@@ -1,5 +1,5 @@
 json.vendor do
-  json.(current_vendor, :id, :name, :description, :longitude, :latitude, :place_id, :address, :description, :logo_url, :setup_complete, :status)
+  json.(current_vendor, :id, :name, :description, :longitude, :latitude, :place_id, :address, :accepting_orders, :description, :logo_url, :setup_complete, :status)
 end
 json.items do
   json.array! current_vendor.items, partial: 'items/item', as: :item

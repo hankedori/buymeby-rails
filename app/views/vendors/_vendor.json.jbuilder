@@ -1,1 +1,1 @@
-json.(vendor, :id, :name, :description, :longitude, :latitude, :image_src, :logo_url)
+json.(vendor, :id, :name, :description, :longitude, :latitude, :image_src, :logo_url, :accepting_orders)
