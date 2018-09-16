@@ -14,8 +14,7 @@ if Vendor.all.empty?
       longitude: '-73.990363',
       image_src: 'https://www.grownyc.org/sites/all/themes/grownyc2015/images/GrowNYCbug100.png',
       email: 'union@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Down to Earth Hudson Yards Farmers Market',
@@ -24,8 +23,7 @@ if Vendor.all.empty?
       longitude: '-74.000506',
       image_src: 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/15826888_1358556664166165_1083826243194307942_n.png?oh=63409cd1f3c09993d7ba91dcc913f627&oe=5AEF23DA',
       email: 'hudson@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Stiles Farmers Market Inc',
@@ -34,8 +32,7 @@ if Vendor.all.empty?
       longitude: '-73.987126',
       image_src: 'https://www.grownyc.org/sites/all/themes/grownyc2015/images/GrowNYCbug100.png',
       email: 'stiles@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Down to Earth Market Chelsea',
@@ -44,8 +41,7 @@ if Vendor.all.empty?
       longitude: '-73.999631',
       image_src: 'https://scontent-iad3-1.xx.fbcdn.net/v/t1.0-9/15826888_1358556664166165_1083826243194307942_n.png?oh=63409cd1f3c09993d7ba91dcc913f627&oe=5AEF23DA',
       email: 'chelsea@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Greenpoint McCarren Park Greenmarket',
@@ -54,8 +50,7 @@ if Vendor.all.empty?
       longitude: '-73.952545',
       image_src: 'https://www.grownyc.org/sites/all/themes/grownyc2015/images/GrowNYCbug100.png',
       email: 'mccarren@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Whole Foods',
@@ -64,8 +59,7 @@ if Vendor.all.empty?
       longitude: '-73.984890',
       image_src: 'https://pbs.twimg.com/profile_images/804367481041080320/ljq1T2Qx_400x400.jpg',
       email: 'wholefoods@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Fairway Market Chelsea',
@@ -74,8 +68,7 @@ if Vendor.all.empty?
       longitude: '-73.991270',
       image_src: 'https://d2lnr5mha7bycj.cloudfront.net/warehouse/logo/53/a21060c5-571b-439f-b308-296c8f5a7e93.png',
       email: 'fairway@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'The Food Emporium',
@@ -84,8 +77,7 @@ if Vendor.all.empty?
       longitude: '-73.989660',
       image_src: 'https://www.keyfood.com/wp-content/uploads/2016/06/The-Food-Emporium-logo_in-oval_V3.png',
       email: 'emporium@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Gristedes',
@@ -94,8 +86,7 @@ if Vendor.all.empty?
       longitude: '-73.999450',
       image_src: 'https://1qs8dv1wrhwnyi81e46gliym-wpengine.netdna-ssl.com/wp-content/uploads/2016/09/gristeds-1.png',
       email: 'gristedes@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'H Mart',
@@ -104,8 +95,7 @@ if Vendor.all.empty?
       longitude: '-73.987415',
       image_src: 'https://d2lnr5mha7bycj.cloudfront.net/warehouse/logo/119/8516e075-bd96-44f9-b2f8-7e6d129848f5.png',
       email: 'hmart@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     },
     {
       name: 'Tan Tin Hung Supermarket',
@@ -114,9 +104,27 @@ if Vendor.all.empty?
       longitude: '-73.994680',
       image_src: 'https://s3.amazonaws.com/bst-fornyc/Simpson%20Wong%20Tan%20Ting%20Hung.jpg',
       email: 'tan@test.com',
-      password: 'password',
-      status: 'active'
+      password: 'password'
     }
   ])
 end
-# AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
+
+if Rails.env.development?
+  AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password')
+
+  app = Rpush::Apns::App.new
+  app.name = "Buymeby"
+  app.certificate = File.read('config/development.pem')
+  app.environment = "development"
+  app.password = "buymeby"
+  app.connections = 1
+  app.save!
+
+  app2 = Rpush::Apns::App.new
+  app2.name = "Sellmeby"
+  app2.certificate = File.read('config/development_sellmeby.pem')
+  app2.environment = "development"
+  app2.password = "sellmeby"
+  app2.connections = 1
+  app2.save!
+end

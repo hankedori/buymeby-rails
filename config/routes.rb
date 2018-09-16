@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resource :api do
     resources :discounts
     resources :operational_hours
+    resources :push
     resources :user_orders do
       put 'cancel', to: 'user_orders#cancel'
     end
@@ -12,8 +13,6 @@ Rails.application.routes.draw do
       post 'add_inventory', to: 'vendors#add_inventory'
       post 'block', to: 'vendors#block'
     end
-    post 'populate_cart' => "cart#populate"
-    post 'place_order' => "cart#order"
     resource :sellmeby do
       scope module: 'sellmeby' do
         post 'upload_logo' => "logos#upload"
@@ -21,11 +20,15 @@ Rails.application.routes.draw do
         resource :vendors
         resources :items
         resources :orders
+        resources :push
       end
     end
+    post 'populate_cart' => "cart#populate"
+    post 'place_order' => "cart#order"
     post 'activate_vendor' => "admin_actions#activate_vendor"
     post 'deactivate_vendor' => "admin_actions#deactivate_vendor"
   end
+
   mount_devise_token_auth_for 'User', at: 'api/auth', controllers: {
     :registrations => "custom/user_registrations"
   }

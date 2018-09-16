@@ -8,7 +8,7 @@ ActiveAdmin.register Vendor do
   filter :created_at
   filter :status
 
-  permit_params :name, :email, :password, :password_confirmation, :description, :status, :logo
+  permit_params :name, :email, :password, :password_confirmation, :description, :status, :logo, :device_token
 
   index do
     selectable_column
@@ -25,6 +25,7 @@ ActiveAdmin.register Vendor do
     column :sign_in_count
     column :last_sign_in_at
     column :status
+    column :device_token
     actions
   end
 
@@ -96,6 +97,16 @@ ActiveAdmin.register Vendor do
 
   sidebar "Vendor Details", only: :show do
     attributes_table_for vendor, :name, :email, :created_at, :setup_complete
+  end
+
+  batch_action :push, form: {
+    message: :text,
+    data: :text
+  } do |ids, input|
+    Vendor.find(ids).each do |vendor|
+      vendor.send_push_notif! input[:message], eval(input[:data])
+    end
+    redirect_to admin_vendors_path, alert: "The push notification has been queued."
   end
 
   # sidebar "Vendor Summary", only: :show do
