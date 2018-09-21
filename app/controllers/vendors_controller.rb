@@ -66,7 +66,7 @@ class VendorsController < ApiController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def vendor_params
-      params.require(:vendor).permit(:name, :description, :latitude, :longitude, :accepting_orders)
+      params.require(:vendor).permit(:name, :description, :latitude, :longitude)
     end
 
     def operational_hours_params
