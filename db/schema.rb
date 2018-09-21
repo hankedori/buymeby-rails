@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180902200001) do
+ActiveRecord::Schema.define(version: 20180916192909) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 20180902200001) do
     t.string "place_id"
     t.string "address"
     t.integer "status", default: 0
+    t.boolean "accepting_orders", default: false
     t.string "device_token"
     t.index ["confirmation_token"], name: "index_vendors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_vendors_on_email", unique: true
