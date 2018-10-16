@@ -5,7 +5,7 @@ applications:
   memory: 256M
   instances: 1
   path: .
-  command: bundle exec rake db:migrate && bundle exec rake db:seed && rails s -p $PORT
-  # command: bundle exec rake db:migrate && rails s -p $PORT
+  # command: bundle exec rake db:migrate && bundle exec rake db:seed && rails s -p $PORT
+  command: bundle exec rake db:migrate && rails s -p $PORT
   services:
     - buymeby-prod
