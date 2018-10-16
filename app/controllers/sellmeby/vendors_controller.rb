@@ -23,7 +23,7 @@ class Sellmeby::VendorsController < ApiController
   end
 
   def vendor_params
-    params.permit(:place_id, :latitude, :longitude, :address, :description)
+    params.permit(:place_id, :latitude, :longitude, :address, :description, :accepting_orders)
   end
 
   def hour_params

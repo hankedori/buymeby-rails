@@ -253,6 +253,7 @@ ActiveRecord::Schema.define(version: 20181016031157) do
     t.string "place_id"
     t.string "address"
     t.integer "status", default: 0
+    t.boolean "accepting_orders", default: false
     t.string "device_token"
     t.string "device_os"
     t.index ["confirmation_token"], name: "index_vendors_on_confirmation_token", unique: true
