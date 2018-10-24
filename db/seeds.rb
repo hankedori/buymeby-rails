@@ -128,3 +128,9 @@ if Rails.env.development?
   app2.connections = 1
   app2.save!
 end
+
+app = Rpush::Gcm::App.new
+app.name = "Buymeby_android"
+app.auth_key = "819870663726"
+app.connections = 1
+app.save!
